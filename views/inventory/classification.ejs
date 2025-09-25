@@ -1,0 +1,30 @@
+<%/* ******************************************
+    * Title: content heading in EJS
+    * Author: Enoch Ateesa Kalule
+    * Date: 24/09/2025
+    * Description: EJS template for content header
+****************************************** */%>
+
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%/* ******************************************
+    * Title: message block
+    * Author: Enoch Ateesa Kalule
+    * Date: 24/09/2025
+    * Description: EJS template for message block
+****************************************** */%>
+<%# messages() %>
+
+<%/* ******************************************
+    * Title: inventory items display
+    * Author: Enoch Ateesa Kalule
+    * Date: 24/09/2025
+    * Description: EJS template for inventory items display
+****************************************** */%>
+<%- grid %>
+
+
