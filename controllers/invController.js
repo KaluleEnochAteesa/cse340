@@ -19,4 +19,24 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Build vehicle detail view
+ * ************************** */
+invCont.buildVehicleDetail = async (req, res, next) => {
+  try {
+    const invId = parseInt(req.params.invId)
+    const data = await invModel.getVehicleById(invId)
+    if (!data) {
+      return next(new Error("Vehicle not found"))
+    }
+    const html = utilities.buildVehicleHTML(data)
+    res.render("inventory/vehicle-detail", {
+      title: `${data.inv_make} ${data.inv_model}`,
+      content: html
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = invCont
