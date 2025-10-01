@@ -30,8 +30,10 @@ invCont.buildVehicleDetail = async (req, res, next) => {
       return next(new Error("Vehicle not found"))
     }
     const html = utilities.buildVehicleHTML(data)
+    const nav = await utilities.getNav()
     res.render("inventory/vehicle-detail", {
       title: `${data.inv_make} ${data.inv_model}`,
+      nav,
       content: html
     })
   } catch (error) {
