@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/register.css" />
+</head>
+<body>
+  <main class="register-container">
+    <h1><%= title %></h1>
+
+    <% if (messages && messages.length > 0) { %>
+      <div class="flash-messages">
+        <% if (messages && typeof messages === 'object') { %>
+          <% Object.keys(messages).forEach(function(type) { %>
+            <% messages[type].forEach(function(msg) { %>
+              <div class="flash-message <%= type %>"><%= msg %></div>
+            <% }) %>
+          <% }) %>
+        <% } %>
+      </div>
+    <% } %>
+
+    <form action="/account/register" method="post" class="register-form">
+      <label for="first_name">First Name</label>
+      <input type="text" id="first_name" name="first_name" required
+        value="<%= typeof first_name != 'undefined' ? first_name : '' %>" />
+
+      <label for="last_name">Last Name</label>
+      <input type="text" id="last_name" name="last_name" required
+        value="<%= typeof last_name != 'undefined' ? last_name : '' %>" />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required
+        value="<%= typeof email != 'undefined' ? email : '' %>" />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required
+        title="Must be at least 12 characters, include a capital letter, a number, and a special character." />
+
+      <button type="button" onclick="togglePassword()">Show/Hide Password</button>
+
+      <button type="submit">Register</button>
+    </form>
+  </main>
+
+  <script>
+    function togglePassword() {
+      const pwd = document.getElementById("password");
+      pwd.type = pwd.type === "password" ? "text" : "password";
+    }
+  </script>
+</body>
+</html>

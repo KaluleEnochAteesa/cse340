@@ -10,5 +10,7 @@ const accountController = require('../controllers/accountController'); // You'll
 router.get('/', handleErrors(accountController.buildLogin));
 router.get('/login', handleErrors(accountController.buildLogin));
 
+router.get('/register', handleErrors(accountController.buildRegister));
+
 // Export the router
 module.exports = router;
