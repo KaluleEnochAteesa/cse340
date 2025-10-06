@@ -58,6 +58,16 @@ function formatMileage(miles) {
   return `${miles.toLocaleString("en-US")} miles`;
 }
 
+/**
+ * Express async error handler wrapper.
+ * Usage: router.get('/route', Util.handleErrors(async (req, res, next) => { ... }))
+ */
+Util.handleErrors = function (fn) {
+  return function (req, res, next) {
+    Promise.resolve(fn(req, res, next)).catch(next);
+  };
+};
+
 Util.buildVehicleHTML = function(vehicle) {
   return `
     <div class="vehicle-detail">

@@ -16,6 +16,7 @@ const baseController = require("./controllers/baseController")
 const inventoryRoute = require('./routes/inventoryRoute');
 const utilities = require("./utilities"); // Add this line to bring utilities into scope
 const errorHandler = require("./middleware/errorHandler");
+const accountRoutes = require('./routes/accountRoute');
 
 
 /* ***********************
@@ -53,8 +54,10 @@ app.use(static)
 //Index route
 app.get("/", baseController.buildHome)
 
+
 // Inventory routes
 app.use("/inv", inventoryRoute)
+app.use('/account', accountRoutes);
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
