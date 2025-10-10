@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= title %></title>
   <link rel="stylesheet" href="/css/register.css" />
+  <style>
+    .password-requirements {
+      font-size: 0.9rem;
+      color: #333;
+      background-color: #f0f0f0;
+      padding: 0.5em;
+      margin-bottom: 0.5em;
+      border-left: 4px solid #0077cc;
+    }
+  </style>
 </head>
 <body>
   <main class="register-container">
@@ -22,6 +32,14 @@
       </div>
     <% } %>
 
+    <% if (errors) { %>
+      <ul class="notice">
+        <% errors.array().forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
     <form action="/account/register" method="post" class="register-form">
       <label for="first_name">First Name</label>
       <input type="text" id="first_name" name="first_name" required
@@ -35,8 +53,12 @@
       <input type="email" id="email" name="email" required
         value="<%= typeof email != 'undefined' ? email : '' %>" />
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required
+      <label for="accountPassword">Password</label>
+      <div class="password-requirements">
+        Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter, and 1 special character.
+      </div>
+      <input type="password" name="account_password" id="accountPassword" required
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
         title="Must be at least 12 characters, include a capital letter, a number, and a special character." />
 
       <button type="button" onclick="togglePassword()">Show/Hide Password</button>
@@ -47,9 +69,10 @@
 
   <script>
     function togglePassword() {
-      const pwd = document.getElementById("password");
+      const pwd = document.getElementById("accountPassword");
       pwd.type = pwd.type === "password" ? "text" : "password";
     }
   </script>
 </body>
 </html>
+

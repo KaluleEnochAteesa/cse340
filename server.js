@@ -17,6 +17,7 @@ const inventoryRoute = require('./routes/inventoryRoute');
 const utilities = require("./utilities"); // Add this line to bring utilities into scope
 const errorHandler = require("./middleware/errorHandler");
 const accountRoutes = require('./routes/accountRoute');
+const bodyParser = require("body-parser")
 
 
 /* ***********************
@@ -32,6 +33,9 @@ const accountRoutes = require('./routes/accountRoute');
   saveUninitialized: true,
   name: 'sessionId',
 }))
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 // Express Messages Middleware
 app.use(require('connect-flash')())
