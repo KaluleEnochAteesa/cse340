@@ -1,0 +1,21 @@
+<!-- filepath: views/inventory/management.ejs -->
+
+<% layout('layouts/layout') %>
+
+<main id="inventory-management">
+  <h1>Inventory Management</h1>
+  <p>Manage all inventory and classifications here.</p>
+
+  <% if (typeof flashMessage !== 'undefined' && flashMessage) { %>
+    <div class="flash-message"><%= flashMessage %></div>
+  <% } %>
+
+  <ul>
+    <li>
+      <a href="/inv/add-classification">Add New Classification</a>
+    </li>
+    <li>
+      <a href="/inv/add-inventory">Add New Inventory</a>
+    </li>
+  </ul>
+</main>

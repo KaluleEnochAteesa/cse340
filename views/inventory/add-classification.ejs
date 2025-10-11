@@ -1,0 +1,47 @@
+<!-- filepath: views/inventory/add-classification.ejs -->
+<% layout('layouts/layout') %>
+
+<main id="add-classification">
+  <h1>Add New Classification</h1>
+  <p>
+    Enter a classification name. <strong>No spaces or special characters allowed.</strong>
+  </p>
+
+  <% if (typeof flashMessage !== 'undefined' && flashMessage) { %>
+    <div class="flash-message"><%= flashMessage %></div>
+  <% } %>
+  <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+    <ul class="error-list">
+      <% errors.forEach(function(error) { %>
+        <li><%= error %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <form id="classificationForm" action="/inv/add-classification" method="POST" novalidate>
+    <label for="classification_name">Classification Name:</label>
+    <input
+      type="text"
+      id="classification_name"
+      name="classification_name"
+      required
+      pattern="^[A-Za-z0-9]+$"
+      title="No spaces or special characters allowed."
+      maxlength="30"
+    >
+    <button type="submit">Add Classification</button>
+  </form>
+
+  <script>
+    // Client-side validation
+    document.getElementById('classificationForm').addEventListener('submit', function(e) {
+      const input = document.getElementById('classification_name');
+      const pattern = /^[A-Za-z0-9]+$/;
+      if (!pattern.test(input.value)) {
+        e.preventDefault();
+        alert('Classification name must not contain spaces or special characters.');
+        input.focus();
+      }
+    });
+  </script>
+</main>

@@ -15,7 +15,15 @@ Util.getNav = async function (req, res, next) {
   return list
 }
 
-
+Util.buildClassificationList = function(classifications) {
+  let list = '<select id="classification_id" name="classification_id" required>';
+  list += '<option value="">Choose a Classification</option>';
+  classifications.rows.forEach(classification => {
+    list += `<option value="${classification.classification_id}">${classification.classification_name}</option>`;
+  });
+  list += '</select>';
+  return list;
+};
 
 /* **************************************
 * Build the classification view HTML

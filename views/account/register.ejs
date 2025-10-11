@@ -42,16 +42,16 @@
 
     <form action="/account/register" method="post" class="register-form">
       <label for="first_name">First Name</label>
-      <input type="text" id="first_name" name="first_name" required
-        value="<%= typeof first_name != 'undefined' ? first_name : '' %>" />
+      <input type="text" name="account_firstname" id="accountFirstname" required
+        value="<%= locals.account_firstname %>" />
 
       <label for="last_name">Last Name</label>
-      <input type="text" id="last_name" name="last_name" required
-        value="<%= typeof last_name != 'undefined' ? last_name : '' %>" />
+      <input type="text" name="account_lastname" id="accountLastname" required
+        value="<%= locals.account_lastname %>" />
 
       <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required
-        value="<%= typeof email != 'undefined' ? email : '' %>" />
+      <input type="email" name="account_email" id="accountEmail" required
+        value="<%= locals.account_email %>" />
 
       <label for="accountPassword">Password</label>
       <div class="password-requirements">
